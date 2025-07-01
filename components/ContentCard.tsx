@@ -1,47 +1,23 @@
-// components/ContentCard.tsx
-import React from "react";
-
-interface ContentCardProps {
-  item: {
-    title: string;
-    description: string;
-    url: string;
-    urlToImage: string;
-    publishedAt?: string;
-    source?: { name: string };
-  };
+type Props = {
+  title: string
+  description: string
+  image: string
+  source: string
+  url: string
 }
 
-const ContentCard: React.FC<ContentCardProps> = ({ item }) => {
+export default function ContentCard({ title, description, image, source, url }: Props) {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all overflow-hidden">
-      {item.urlToImage && (
-        <img
-          src={item.urlToImage}
-          alt={item.title}
-          className="h-48 w-full object-cover"
-        />
-      )}
-      <div className="p-4 space-y-2">
-        <h3 className="text-lg font-semibold line-clamp-2">{item.title}</h3>
-        <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-3">
-          {item.description}
-        </p>
-        <div className="flex justify-between items-center text-xs text-gray-500">
-          <span>{item.source?.name}</span>
-          <span>{new Date(item.publishedAt || '').toLocaleDateString()}</span>
-        </div>
-        <a
-          href={item.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block text-blue-600 hover:underline text-sm mt-2"
-        >
-          Read more →
+    <div className="rounded-xl border bg-white dark:bg-gray-800 shadow p-4 hover:shadow-lg transition">
+      <img src={image} alt={title} className="w-full h-40 object-cover rounded-lg" />
+      <h2 className="text-lg font-semibold mt-3">{title}</h2>
+      <p className="text-sm text-gray-500 mt-1">{description}</p>
+      <div className="mt-3 flex justify-between items-center">
+        <span className="text-xs text-gray-400">{source}</span>
+        <a href={url} target="_blank" className="text-blue-500 hover:underline text-sm">
+          Read More →
         </a>
       </div>
     </div>
-  );
-};
-
-export default ContentCard;
+  )
+}
