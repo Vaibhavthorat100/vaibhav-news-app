@@ -1,15 +1,28 @@
+import Link from 'next/link'
+import { Home, Flame, Star, Settings } from 'lucide-react'
+
+const links = [
+  { label: 'Home', icon: <Home size={20} />, href: '/' },
+  { label: 'Trending', icon: <Flame size={20} />, href: '/trending' },
+  { label: 'Favorites', icon: <Star size={20} />, href: '/favorites' },
+  { label: 'Settings', icon: <Settings size={20} />, href: '/settings' },
+]
+
 export default function Sidebar() {
   return (
-    <aside className="w-64 bg-white dark:bg-gray-800 border-r dark:border-gray-700 p-4">
-      <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Dashboard</h2>
-      <nav>
-        <ul className="space-y-2 text-gray-700 dark:text-gray-200">
-          <li>🏠 Home</li>
-          <li>🔥 Trending</li>
-          <li>⭐ Favorites</li>
-          <li>⚙ Settings</li>
-        </ul>
+    <aside className="h-screen w-64 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border-r">
+      <div className="p-6 text-2xl font-bold">Dashboard</div>
+      <nav className="flex flex-col gap-3 p-4">
+        {links.map(link => (
+          <Link
+            key={link.label}
+            href={link.href}
+            className="flex items-center gap-3 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+          >
+            {link.icon} {link.label}
+          </Link>
+        ))}
       </nav>
     </aside>
-  );
+  )
 }
